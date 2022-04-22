@@ -1,0 +1,38 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      id: build
+      run: |
+        echo 'org.gradle.jvmargs=-Xmx3072m' >> gradle.properties
+        ./gradlew :app:assembleRelease
+        echo "::set-output name=status::success"
+
+    - name: Upload Artefact
+      uses: actions/upload-artifact@main
+      if: steps.build.outputs.status == 'success' && !cancelled()
+      with:
+        name: app-release
+        path: app/build/outputs/apk/release/app-release-unsigned.apk

@@ -1,0 +1,11 @@
+export HOME="$Data_Dir"
+lu="$HOME/.android"
+     if [[ ! -d "$lu" ]]; then
+        mkdir -p "$lu"
+        chown $APP_USER_ID:$APP_USER_ID "$lu"
+     fi
+if $ELF3_Path/adb_arm64 --version >/dev/null 2>&1; then
+    exec "$ELF3_Path/adb_arm64" "$@"
+else
+    exec "$ELF3_Path/adb_arm" "$@"
+fi
