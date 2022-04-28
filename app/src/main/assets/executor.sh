@@ -15,15 +15,12 @@ export Pages=$PREFIX/pages
 export ShellScript=$PREFIX/kr-script
 export PeiZhi_File=~/Configuration_File
 export Data_Dir=$PREFIX/Data_Dir
-export ELF1_Path="$PREFIX/bin"
-export ELF2_Path="$PREFIX/bin/xbin"
-export ELF3_Path="$PREFIX/xbin"
-export ELF4_Path="$PREFIX/busybox"
+export ELF1_Path="$PREFIX/xbin"
 export which="$ELF1_Path/which"
 export data_MD5="$ShellScript/init_all_MD5.sh"
 export Load="$ShellScript/init_data.sh"
 export Core="$ShellScript/Util_Functions.sh"
-export PATH="${ELF1_Path}:${ELF2_Path}:${ELF3_Path}:${PATH0}:${ELF4_Path}"
+export PATH="${ELF1_Path}:${PATH0}"
 export TMP=/data/local/tmp
 [[ -f $Core ]] && . $Core
 
