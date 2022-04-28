@@ -11,9 +11,9 @@ az() {
     echo 0 >$Status
     
     if [[ $log -eq 1 ]]; then
-        sh $ShellScript/ADB/install_apk.sh | tee -a "$log_file"
+        . $ShellScript/ADB/install_apk.sh | tee -a "$log_file"
     else
-        sh $ShellScript/ADB/install_apk.sh
+        . $ShellScript/ADB/install_apk.sh
     fi
     result=`cat $Status`
     [[ $result -eq 1 ]] && return $result
