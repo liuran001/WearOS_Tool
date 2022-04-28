@@ -1,3 +1,4 @@
+export Status=$Data_Dir/Status.log
 adb() (
     local ADB=`$which adb`
     if [[ $# -eq 0 ]]; then
