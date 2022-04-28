@@ -63,7 +63,7 @@ fi
                 . $ShellScript/ADB/Read_Push_files.sh -push
                 rm -rf $Dir
           fi
-          Number=`unzip -l "$File" 2>/dev/nul | egrep '\.apk'$ | wc -l`
+          Number=`unzip -l "$File" 2>/dev/null | egrep '\.apk'$ | wc -l`
           [[ $Number -eq 0 ]] && abort "！$name 文件不是正规$suffix文件"
           session1="adb2 -c pm install-create -r"$installer""
           session=`eval $session1`
