@@ -9,6 +9,7 @@ abort() {
     exit 1
 }
 
+. $Core
 
 IFS=$'\n'
 suffix=${File##*.}
@@ -43,6 +44,7 @@ fi
                 result=$?
                 rm -f "$TMP/$name"
                 [[ $result -eq 0 ]] && echo "- $name安装成功" || { [[ $Choice = 1 ]] && cp -f "$File" "$GJZS/$name" && abort -e "！$name安装失败\n已自动复制到：$GJZS/$name，请手动前往安装"; }
+                exit $result
           fi
      elif [[ $suffix = apex ]]; then
           size=`wc -c < "$File"`
@@ -50,6 +52,7 @@ fi
           eval $a
           result=$?
           [[ $result = 0 ]] && echo "- $name安装成功" && [[ $Delete_APK = 1 ]] && rm -f "$File" || abort "！$name安装失败."
+          exit $result
      fi
      
           if unzip -l "$File" | fgrep -q 'Android/obb'; then
@@ -88,3 +91,4 @@ fi
                           adb2 -c pm install-abandon $session_id
                           abort "！$name安装失败"
                      fi
+                     exit $result
