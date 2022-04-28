@@ -44,8 +44,8 @@ fi
                 result=$?
                 rm -f "$TMP/$name"
                 [[ $result -eq 0 ]] && echo "- $name安装成功" || { [[ $Choice = 1 ]] && cp -f "$File" "$GJZS/$name" && abort -e "！$name安装失败\n已自动复制到：$GJZS/$name，请手动前往安装"; }
-                exit $result
           fi
+          exit $result
      elif [[ $suffix = apex ]]; then
           size=`wc -c < "$File"`
           a="cat \""$File"\" | adb2 -c pm install -r -S "$size" --apex"$installer" 1>/dev/null"
